@@ -1,13 +1,13 @@
+//日期格式化
 export function dateFormat(dateTimeString) {
 
     const dateObject = new Date(dateTimeString);
     const localDateString = dateObject.toLocaleString();
     const results = localDateString.split(' ');
-    const temp= results[0].split('/');
-    
-    return ((temp[0]+"-"+temp[1]+"-"+temp[2]));
+    return (results[0].split('/')[0] + '-' + results[0].split('/')[1] + '-' + results[0].split('/')[2]);
 }
 
+//時間格式化
 export function dateTimeFormat(dateTimeString) {
 
     const dateObject = new Date(dateTimeString);
@@ -20,7 +20,26 @@ export function dateTimeFormat(dateTimeString) {
         hr = '00';
     else
         hr = time[0];
-    let formatTime = date + ' ' + hr + ':' + time[1] + ':' + time[2];
-
+    let formatTime = date.split('/')[0] + '-' + date.split('/')[1] + '-' + date.split('/')[2] + ' ' + hr + ':' + time[1] + ':' + time[2];
     return (formatTime);
+}
+
+//判斷行程是否過期
+export function isExpired(dateTimeString) {
+
+    const dateObject = new Date(dateTimeString);
+    const nowTime = new Date();
+    return (nowTime > dateObject);
+
+}
+
+export function test() {
+
+    const dateObject = Date.now();
+
+    const currentTime = new Date(dateObject);
+    const newTime = dateObject + 60 * 10 * 1000;
+
+    return (new Date().toLocaleString() +''+ new Date(Date.now()+ 60 * 10 * 1000).toLocaleString());
+
 }
